@@ -1,6 +1,7 @@
 *, ::before, ::after {
   box-sizing: border-box;
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
 body {
@@ -19,7 +20,6 @@ h1 {
 .level-divider-container {
   position: relative;
   width: 100%;
-  text-align: center;
 }
 
 .level-divider {
@@ -52,7 +52,6 @@ h1 {
   border: 2px solid black;
   border-radius: 50%;
   background-color: lightskyblue;
-  text-align: center;
 }
 
 .project-container:nth-child(12n + 2) {
