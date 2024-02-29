@@ -68,15 +68,15 @@ const levels = [
         deployable: false,
       },
       {
+        name: "Zoo Management",
+        deployable: false,
+      },
+      {
         name: "MyFace (Accounts)",
         deployable: false,
       },
       {
         name: "ShipIt",
-        deployable: false,
-      },
-      {
-        name: "Zoo Management",
         deployable: false,
       },
     ],
