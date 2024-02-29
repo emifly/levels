@@ -92,17 +92,10 @@ const levels = [
   },
 ]
 
-function createProject(project, levelContainer)
-{
-  const projectKey = project.name.replace(" ", "-")
-  const projectContainer = document.createElement("div")
-  projectContainer.className = "project-container"
-  projectContainer.setAttribute("data-aos", "fade-up")
-  const projectNameParagraph = document.createElement("p")
-  projectNameParagraph.className = "project-name-paragraph"
-  projectNameParagraph.textContent = project.name
+function createStars(projectKey, parent) {
   const starsContainer = document.createElement("div")
   starsContainer.className = "stars-container"
+
   for (let starIndex = 1; starIndex <= 3; starIndex++) {
     const starToggler = document.createElement("input")
     starToggler.className = "star-toggler"
@@ -111,62 +104,109 @@ function createProject(project, levelContainer)
     starToggler.value = starIndex
     starToggler.id = `${projectKey}-${starIndex}`
     starToggler.ariaLabel = `${starIndex} star${starIndex === 1 ? "" : "s"}`
+    starsContainer.appendChild(starToggler)
+
     const star = document.createElement("label")
     star.className = "star"
     star.htmlFor = `${projectKey}-${starIndex}`
     star.textContent = "★"
-    starsContainer.appendChild(starToggler)
     starsContainer.appendChild(star)
   }
+
+  parent.appendChild(starsContainer)
+}
+
+function createRocket(projectKey, parent) {
   const rocketContainer = document.createElement("div")
+
   const rocketToggler = document.createElement("input")
   rocketToggler.className = "rocket-toggler"
   rocketToggler.type = "checkbox"
   rocketToggler.id = `${projectKey}-rocket`
+  rocketContainer.appendChild(rocketToggler)
+
   const rocket = document.createElement("label")
   rocket.className = "rocket"
   rocket.htmlFor = `${projectKey}-rocket`
   rocket.textContent = "🚀"
-  rocketContainer.appendChild(rocketToggler)
   rocketContainer.appendChild(rocket)
+
+  parent.appendChild(rocketContainer)
+}
+
+function createResetButton(parent) {
   const resetButton = document.createElement("button")
   resetButton.textContent = "Reset"
   resetButton.className = "reset-button"
   resetButton.addEventListener("click", function() {
-    starsContainer.childNodes.forEach((starToggler) => {
+    const starTogglers = parent.querySelectorAll(".star-toggler")
+    starTogglers.forEach((starToggler) => {
       starToggler.checked = false
     })
-    rocketToggler.checked = false
+    const rocketToggler = parent.querySelector(".rocket-toggler")
+    if (rocketToggler) {
+      rocketToggler.checked = false
+    }
   })
-  projectContainer.appendChild(projectNameParagraph)
-  projectContainer.appendChild(starsContainer)
-  if (project.deployable) {
-    projectContainer.appendChild(rocketContainer)
-  }
-  projectContainer.appendChild(resetButton)
-  levelContainer.appendChild(projectContainer)
+  parent.appendChild(resetButton)
 }
 
-function createLevel(level) {
-  const levelContainer = document.createElement("section")
-  level.projects.forEach((project) => {
-    createProject(project, levelContainer)
-  })
+function createProject(project, parent) {
+  const projectKey = project.name.replace(" ", "-")
+
+  const projectContainer = document.createElement("div")
+  projectContainer.className = "project-container"
+  projectContainer.setAttribute("data-aos", "fade-up")
+
+  const projectNameParagraph = document.createElement("p")
+  projectNameParagraph.className = "project-name-paragraph"
+  projectNameParagraph.textContent = project.name
+  projectContainer.appendChild(projectNameParagraph)
+
+  createStars(projectKey, projectContainer)
+
+  if (project.deployable) {
+    createRocket(projectKey, projectContainer)
+  }
+
+  createResetButton(projectContainer)
+
+  parent.appendChild(projectContainer)
+}
+
+function createLevelDivider(level, parent) {
   const levelDividerContainer = document.createElement("div")
   levelDividerContainer.className = "level-divider-container"
   levelDividerContainer.setAttribute("data-aos", "fade-up")
+
   const levelDividerLeft = document.createElement("hr")
   levelDividerLeft.className = "level-divider"
+  levelDividerContainer.appendChild(levelDividerLeft)
+  
   const levelHeading = document.createElement("h2")
   levelHeading.className = "level-heading"
+  levelHeading.textContent = level.name
+  levelDividerContainer.appendChild(levelHeading)
+
   const levelDividerRight = document.createElement("hr")
   levelDividerRight.className = "level-divider"
-  levelHeading.textContent = level.name
-  levelDividerContainer.appendChild(levelDividerLeft)
-  levelDividerContainer.appendChild(levelHeading)
   levelDividerContainer.appendChild(levelDividerRight)
-  document.body.appendChild(levelDividerContainer)
-  document.body.appendChild(levelContainer)
+
+  parent.appendChild(levelDividerContainer)
 }
 
-levels.forEach(createLevel)
+function createLevel(level, parent) {
+  const levelContainer = document.createElement("section")
+
+  createLevelDivider(level, parent)
+
+  level.projects.forEach((project) => {
+    createProject(project, levelContainer)
+  })
+
+  parent.appendChild(levelContainer)
+}
+
+levels.forEach(function(level) {
+  createLevel(level, document.body)
+})
