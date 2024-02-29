@@ -101,9 +101,13 @@ function createStars(projectKey, parent) {
     starToggler.className = "star-toggler"
     starToggler.type = "radio"
     starToggler.name = projectKey
-    starToggler.value = starIndex
+    starToggler.value = starIndex.toString()
     starToggler.id = `${projectKey}-${starIndex}`
     starToggler.ariaLabel = `${starIndex} star${starIndex === 1 ? "" : "s"}`
+    starToggler.checked = localStorage.getItem(`${projectKey}-stars`) === starIndex.toString()
+    starToggler.addEventListener("change", function() {
+      localStorage.setItem(`${projectKey}-stars`, starToggler.value)
+    })
     starsContainer.appendChild(starToggler)
 
     const star = document.createElement("label")
@@ -123,6 +127,12 @@ function createRocket(projectKey, parent) {
   rocketToggler.className = "rocket-toggler"
   rocketToggler.type = "checkbox"
   rocketToggler.id = `${projectKey}-rocket`
+  rocketToggler.checked = localStorage.getItem(`${projectKey}-rocket`) === "checked"
+  rocketToggler.addEventListener("change", function() {
+    localStorage.setItem(`${projectKey}-rocket`, rocketToggler.checked
+      ? "checked"
+      : "unchecked")
+  })
   rocketContainer.appendChild(rocketToggler)
 
   const rocket = document.createElement("label")
@@ -134,7 +144,7 @@ function createRocket(projectKey, parent) {
   parent.appendChild(rocketContainer)
 }
 
-function createResetButton(parent) {
+function createResetButton(projectKey, parent) {
   const resetButton = document.createElement("button")
   resetButton.textContent = "Reset"
   resetButton.className = "reset-button"
@@ -143,10 +153,13 @@ function createResetButton(parent) {
     starTogglers.forEach((starToggler) => {
       starToggler.checked = false
     })
+    localStorage.setItem(`${projectKey}-stars`, "0")
+
     const rocketToggler = parent.querySelector(".rocket-toggler")
     if (rocketToggler) {
       rocketToggler.checked = false
     }
+    localStorage.setItem(`${projectKey}-rocket`, "unchecked")
   })
   parent.appendChild(resetButton)
 }
@@ -169,7 +182,7 @@ function createProject(project, parent) {
     createRocket(projectKey, projectContainer)
   }
 
-  createResetButton(projectContainer)
+  createResetButton(projectKey, projectContainer)
 
   parent.appendChild(projectContainer)
 }
