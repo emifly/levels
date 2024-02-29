@@ -97,6 +97,7 @@ function createProject(project, levelContainer)
   const projectKey = project.name.replace(" ", "-")
   const projectContainer = document.createElement("div")
   projectContainer.className = "project-container"
+  projectContainer.setAttribute("data-aos", "fade-up")
   const projectNameParagraph = document.createElement("p")
   projectNameParagraph.className = "project-name-paragraph"
   projectNameParagraph.textContent = project.name
@@ -153,6 +154,7 @@ function createLevel(level) {
   })
   const levelDividerContainer = document.createElement("div")
   levelDividerContainer.className = "level-divider-container"
+  levelDividerContainer.setAttribute("data-aos", "fade-up")
   const levelDividerLeft = document.createElement("hr")
   levelDividerLeft.className = "level-divider"
   const levelHeading = document.createElement("h2")

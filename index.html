@@ -8,9 +8,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&family=Mali&display=swap">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 </head>
 <body>
-  <h1>Progress Tracker</h1>
+  <h1 data-aos="zoom-in" data-aos-easing="cubic">Progress Tracker</h1>
   <script src="script.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 600,
+      easing: "ease-out-back",
+      once: true,
+    })
+  </script>
 </body>
 </html>
