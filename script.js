@@ -138,11 +138,11 @@ function createProject(project, levelContainer)
     rocketToggler.checked = false
   })
   projectContainer.appendChild(projectNameParagraph)
-  projectContainer.appendChild(resetButton)
   projectContainer.appendChild(starsContainer)
   if (project.deployable) {
     projectContainer.appendChild(rocketContainer)
   }
+  projectContainer.appendChild(resetButton)
   levelContainer.appendChild(projectContainer)
 }
 
@@ -153,13 +153,16 @@ function createLevel(level) {
   })
   const levelDividerContainer = document.createElement("div")
   levelDividerContainer.className = "level-divider-container"
-  const levelDivider = document.createElement("hr")
-  levelDivider.className = "level-divider"
-  const levelDividerOverlay = document.createElement("h2")
-  levelDividerOverlay.className = "level-divider-overlay"
-  levelDividerOverlay.textContent = level.name
-  levelDividerContainer.appendChild(levelDivider)
-  levelDividerContainer.appendChild(levelDividerOverlay)
+  const levelDividerLeft = document.createElement("hr")
+  levelDividerLeft.className = "level-divider"
+  const levelHeading = document.createElement("h2")
+  levelHeading.className = "level-heading"
+  const levelDividerRight = document.createElement("hr")
+  levelDividerRight.className = "level-divider"
+  levelHeading.textContent = level.name
+  levelDividerContainer.appendChild(levelDividerLeft)
+  levelDividerContainer.appendChild(levelHeading)
+  levelDividerContainer.appendChild(levelDividerRight)
   document.body.appendChild(levelDividerContainer)
   document.body.appendChild(levelContainer)
 }

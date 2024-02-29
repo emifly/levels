@@ -9,7 +9,24 @@ body {
   flex-direction: column;
   align-items: center;
   margin: 2rem;
-  background-color: deepskyblue;
+  background-color: black;
+  background-image: url('background.jpeg');
+  background-position: top;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+body::after {
+  content: "";
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0008;
 }
 
 h1 {
@@ -18,23 +35,23 @@ h1 {
 }
 
 .level-divider-container {
+  display: flex;
+  align-items: center;
   position: relative;
   width: 100%;
+  filter: drop-shadow(0 0 5px black);
 }
 
 .level-divider {
-  position: absolute;
-  z-index: -1;
-  top: 1rem;
   width: 100%;
-  border: 1px solid black;
+  border: 1px solid white;
 }
 
-.level-divider-overlay {
+.level-heading {
   display: inline-block;
+  flex-shrink: 0;
   margin: 0;
   padding: 0 1rem;
-  background-color: deepskyblue;
   font-size: 2rem;
   font-family: 'Mali', cursive;
 }
@@ -44,67 +61,90 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.25rem;
   position: relative;
   width: 13.5rem;
   height: 13.5rem;
   margin: 1rem;
   padding: 3rem;
-  border: 2px solid black;
+  border: 2px solid white;
   border-radius: 50%;
-  background-color: lightskyblue;
+  box-shadow: 0 0 5px black;
+  color: black
 }
 
-.project-container:nth-child(12n + 2) {
+.project-container:nth-child(11n + 1) {
+  background-color: #ff8093aa;
+}
+
+.project-container:nth-child(11n + 2) {
   left: 6vw;
+  background-color: #ffc678aa;
 }
 
-.project-container:nth-child(12n + 3) {
+.project-container:nth-child(11n + 3) {
   left: 12vw;
+  background-color: #fff77baa;
 }
 
-.project-container:nth-child(12n + 4) {
+.project-container:nth-child(11n + 4) {
   left: 15vw;
+  background-color: #abff80aa;
 }
 
-.project-container:nth-child(12n + 5) {
+.project-container:nth-child(11n + 5) {
+  left: 15vw;
+  background-color: #5cff88aa;
+}
+
+.project-container:nth-child(11n + 6) {
   left: 12vw;
+  background-color: #78fff1aa;
 }
 
-.project-container:nth-child(12n + 6) {
+.project-container:nth-child(11n + 7) {
   left: 6vw;
+  background-color: #62d8ffaa;
 }
 
-.project-container:nth-child(12n + 8) {
-  right: 6vw;
+.project-container:nth-child(11n + 8) {
+  right: 1vw;
+  background-color: #7198ffaa;
 }
 
-.project-container:nth-child(12n + 9) {
-  right: 12vw;
+.project-container:nth-child(11n + 9) {
+  right: 8vw;
+  background-color: #a076ffaa;
 }
 
-.project-container:nth-child(12n + 10) {
-  right: 15vw;
+.project-container:nth-child(11n + 10) {
+  right: 11vw;
+  background-color: #ff81ffaa;
 }
 
-.project-container:nth-child(12n + 11) {
-  right: 12vw;
+.project-container:nth-child(11n) {
+  right: 8vw;
+  background-color: #ff70caaa;
 }
 
-.project-container:nth-child(12n) {
-  right: 6vw;
+.project-container:only-child {
+  background-color: #ffffffaa;
 }
 
 .project-name-paragraph {
-  margin: 0 0 0.5rem;
+  margin: 0;
   font-size: 1.5rem;
+  filter: drop-shadow(0 0 5px white);
 }
 
 .reset-button {
+  margin-top: 0.25rem;
   padding: 0.25rem 0.5rem;
   border: 1px solid black;
   border-radius: 1000px;
-  background-color: deepskyblue;
+  background-color: #ddd4;
   font-size: 1rem;
+  text-shadow: 0 0 5px white;
   cursor: pointer;
   transition: filter 0.25s;
 }
@@ -123,8 +163,7 @@ h1 {
 }
 
 .stars-container:not(:has(:checked)) .star {
-  color: dimgray !important;
-  text-shadow: none;
+  color: #0006;
 }
 
 .star-toggler {
@@ -135,7 +174,8 @@ h1 {
   line-height: 2.5rem;
   font-size: 2.5rem;
   color: gold;
-  text-shadow: 0 0 2px black;
+  filter: drop-shadow(0 0 2px black);
+  cursor: pointer;
 }
 
 .star:nth-of-type(2) {
@@ -143,13 +183,11 @@ h1 {
 }
 
 .star-toggler:checked ~ .star {
-  color: dimgray;
-  text-shadow: none;
+  color: #0006;
 }
 
 .star-toggler:checked + .star {
   color: gold;
-  text-shadow: 0 0 2px black;
 }
 
 .rocket-toggler {
@@ -159,6 +197,7 @@ h1 {
 .rocket {
   font-size: 1.5rem;
   filter: brightness(0.6);
+  cursor: pointer;
 }
 
 .rocket-toggler:checked + .rocket {
